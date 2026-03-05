@@ -13,6 +13,7 @@
             --text-muted: #8b949e;
             --accent-blue: #58a6ff;
             --accent-green: #238636;
+            --accent-purple: #bc8cff;
             --header-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -28,44 +29,50 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             width: 100%;
         }
 
         .main-title {
             color: var(--accent-blue);
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 30px;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
 
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
         h2 {
             color: var(--accent-blue);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         h3 {
             color: var(--text-main);
             border-left: 4px solid var(--accent-blue);
             padding-left: 15px;
-            margin-top: 25px;
+            margin-top: 30px;
+            font-size: 1.2rem;
         }
 
-        p {
-            color: var(--text-main);
-            margin-bottom: 15px;
+        .highlight-text {
+            color: var(--accent-purple);
+            font-weight: 600;
+            margin-top: 15px;
+            display: block;
         }
 
         ul {
@@ -84,30 +91,67 @@
             position: absolute;
             left: 0;
             color: var(--accent-blue);
-            font-weight: bold;
+        }
+
+        .command-container {
+            background-color: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow: hidden;
         }
 
         .command-box {
-            background-color: #0d1117;
-            border: 1px dashed var(--accent-blue);
             padding: 15px;
-            border-radius: 5px;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Consolas', 'Monaco', monospace;
             color: #79c0ff;
-            margin: 15px 0;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+        }
+
+        .copy-btn {
+            background-color: #21262d;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin: 10px;
+            float: right;
+            transition: 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: #30363d;
+            border-color: var(--text-muted);
+        }
+
+        .example-block {
+            background-color: rgba(188, 140, 255, 0.05);
+            border: 1px solid rgba(188, 140, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
         }
 
         .summary-section {
             border: 2px solid var(--accent-green);
-            background-color: rgba(35, 134, 54, 0.05);
+            background-color: rgba(35, 134, 54, 0.03);
         }
 
         .footer {
             text-align: center;
             font-style: italic;
             color: var(--text-muted);
-            margin-top: 40px;
-            font-size: 0.9rem;
+            margin-top: 50px;
+            padding-bottom: 30px;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
         }
     </style>
 </head>
@@ -119,6 +163,9 @@
     <div class="card">
         <h2>Why Start a New Thread?</h2>
         <p>When a thread becomes too long, it may start to slow down the AI’s performance. To maintain a smooth workflow, it's recommended to start a new thread, which will improve speed and ensure the conversation remains responsive.</p>
+        
+        <span class="highlight-text">Model’s Internal Algorithms</span>
+        <p>The algorithms used to process large amounts of text and maintain logical flow across long conversations can become inefficient as the input grows. At a certain point, the AI might not handle complex or long conversations as smoothly as shorter ones.</p>
     </div>
 
     <div class="card">
@@ -126,46 +173,45 @@
 
         <h3>1. Identify When to Start a New Thread</h3>
         <ul>
-            <li>If you notice the conversation is slowing down or responses are taking longer than usual, it’s a good sign that the thread has become too long.</li>
-            <li>To avoid delays, it's best to start a new thread before the performance is significantly affected.</li>
+            <li>If you notice the conversation is slowing down or responses are taking longer than usual.</li>
+            <li>Best to start a new thread before performance is significantly affected.</li>
         </ul>
 
         <h3>2. Ask the AI to Provide Project Context</h3>
-        <p>In your current thread, simply ask the AI to provide a project context block.</p>
-        <p><strong>Example command to use:</strong></p>
-        <div class="command-box">
-            “I would like to start a new thread. Please provide the following project context block at the top for this project, so the new conversation can continue from where we stopped.”
+        <p>Ask for the context block in your <strong>current</strong> thread:</p>
+        <div class="command-container clearfix">
+            <button class="copy-btn" onclick="copyText('cmd1')">Copy Command</button>
+            <div id="cmd1" class="command-box">“I would like to start a new thread. Please provide the following project context block at the top for this project, so the new conversation can continue from where we stopped.”</div>
         </div>
-        <p>This will ensure that the AI knows exactly what the project is about and where you left off.</p>
 
-        <h3>3. Copy the Project Context Block</h3>
-        <p>Once the AI provides the project context block, copy it. This block will contain important details about the project, including where you left off, the key objectives, and any relevant information that will allow the AI to pick up from where you stopped.</p>
+        <h3>3. Example: How to Use It</h3>
+        <div class="example-block">
+            <p><strong>Step A:</strong> You type the command above in your old chat.</p>
+            <p><strong>Step B:</strong> The AI replies with: <br><em>"Project: Web Design | Status: Part 1 Complete | Next: Coding Footer..."</em></p>
+            <p><strong>Step C:</strong> You copy that block, open a <strong>New Thread</strong>, and paste it immediately.</p>
+        </div>
 
-        <h3>4. Start the New Thread</h3>
-        <ul>
-            <li>Open a new thread with the AI.</li>
-            <li>Paste the copied project context block at the very beginning of the new thread. This is critical as it ensures the AI has the necessary background to continue working on the project without missing any important details.</li>
-        </ul>
-
-        <h3>5. Continue Where You Left Off</h3>
-        <p>After pasting the project context block, you can resume the conversation by asking questions or giving commands just like you would in the original thread.</p>
-        <p><strong>Example follow-up message:</strong> "Let’s continue from where we left off and pick up with the next steps for the project."</p>
-
-        <h3>6. Name the New Thread</h3>
-        <p>For clarity, name the new thread something like "Project Name - Part 2" (or anything else that makes sense). This will help you keep track of the different parts of the project as it progresses across multiple threads.</p>
+        <h3>4. Start the New Thread & Continue</h3>
+        <p>Paste the block, then follow up with:</p>
+        <div class="command-container clearfix">
+            <button class="copy-btn" onclick="copyText('cmd2')">Copy Command</button>
+            <div id="cmd2" class="command-box">“Let’s continue from where we left off and pick up with the next steps for the project.”</div>
+        </div>
     </div>
 
     <div class="card summary-section">
         <h2>Quick Summary of Commands:</h2>
-        <p><strong>To ask for the project context block:</strong></p>
-        <div class="command-box">
-            “I would like to start a new thread. Please provide the following project context block at the top for this project, so the new conversation can continue from where we stopped.”
-        </div>
         
-        <p><strong>To continue the project in the new thread:</strong></p>
-        <p>Paste the context block into the new thread and then continue with:</p>
-        <div class="command-box">
-            “Let’s continue from where we left off and pick up with the next steps for the project.”
+        <p><strong>Step 1: Get Context (Old Thread)</strong></p>
+        <div class="command-container clearfix">
+            <button class="copy-btn" onclick="copyText('sum1')">Copy</button>
+            <div id="sum1" class="command-box">“I would like to start a new thread. Please provide the following project context block at the top for this project, so the new conversation can continue from where we stopped.”</div>
+        </div>
+
+        <p><strong>Step 2: Resume (New Thread)</strong></p>
+        <div class="command-container clearfix">
+            <button class="copy-btn" onclick="copyText('sum2')">Copy</button>
+            <div id="sum2" class="command-box">“Let’s continue from where we left off and pick up with the next steps for the project.”</div>
         </div>
     </div>
 
@@ -173,6 +219,22 @@
         ***Umer Malik: Where Craft Meets Research***
     </div>
 </div>
+
+<script>
+    function copyText(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.innerText = "Copied!";
+            btn.style.backgroundColor = "#238636";
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.backgroundColor = "#21262d";
+            }, 2000);
+        });
+    }
+</script>
 
 </body>
 </html>
