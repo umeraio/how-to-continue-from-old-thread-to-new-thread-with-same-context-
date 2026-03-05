@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step-by-Step Guide: New Thread</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #238636;
+            --header-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--header-font);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .main-title {
+            color: var(--accent-blue);
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: var(--accent-blue);
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: var(--text-main);
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 15px;
+            margin-top: 25px;
+        }
+
+        p {
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        .command-box {
+            background-color: #0d1117;
+            border: 1px dashed var(--accent-blue);
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #79c0ff;
+            margin: 15px 0;
+        }
+
+        .summary-section {
+            border: 2px solid var(--accent-green);
+            background-color: rgba(35, 134, 54, 0.05);
+        }
+
+        .footer {
+            text-align: center;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="main-title">Step-by-Step Guide: Starting a New Thread</h1>
+
+    <div class="card">
+        <h2>Why Start a New Thread?</h2>
+        <p>When a thread becomes too long, it may start to slow down the AI’s performance. To maintain a smooth workflow, it's recommended to start a new thread, which will improve speed and ensure the conversation remains responsive.</p>
+    </div>
+
+    <div class="card">
+        <h2>How to Start a New Thread and Continue the Same Project</h2>
+
+        <h3>1. Identify When to Start a New Thread</h3>
+        <ul>
+            <li>If you notice the conversation is slowing down or responses are taking longer than usual, it’s a good sign that the thread has become too long.</li>
+            <li>To avoid delays, it's best to start a new thread before the performance is significantly affected.</li>
+        </ul>
+
+        <h3>2. Ask the AI to Provide Project Context</h3>
+        <p>In your current thread, simply ask the AI to provide a project context block.</p>
+        <p><strong>Example command to use:</strong></p>
+        <div class="command-box">
+            “I would like to start a new thread. Please provide the following project context block at the top for this project, so the new conversation can continue from where we stopped.”
+        </div>
+        <p>This will ensure that the AI knows exactly what the project is about and where you left off.</p>
+
+        <h3>3. Copy the Project Context Block</h3>
+        <p>Once the AI provides the project context block, copy it. This block will contain important details about the project, including where you left off, the key objectives, and any relevant information that will allow the AI to pick up from where you stopped.</p>
+
+        <h3>4. Start the New Thread</h3>
+        <ul>
+            <li>Open a new thread with the AI.</li>
+            <li>Paste the copied project context block at the very beginning of the new thread. This is critical as it ensures the AI has the necessary background to continue working on the project without missing any important details.</li>
+        </ul>
+
+        <h3>5. Continue Where You Left Off</h3>
+        <p>After pasting the project context block, you can resume the conversation by asking questions or giving commands just like you would in the original thread.</p>
+        <p><strong>Example follow-up message:</strong> "Let’s continue from where we left off and pick up with the next steps for the project."</p>
+
+        <h3>6. Name the New Thread</h3>
+        <p>For clarity, name the new thread something like "Project Name - Part 2" (or anything else that makes sense). This will help you keep track of the different parts of the project as it progresses across multiple threads.</p>
+    </div>
+
+    <div class="card summary-section">
+        <h2>Quick Summary of Commands:</h2>
+        <p><strong>To ask for the project context block:</strong></p>
+        <div class="command-box">
+            “I would like to start a new thread. Please provide the following project context block at the top for this project, so the new conversation can continue from where we stopped.”
+        </div>
+        
+        <p><strong>To continue the project in the new thread:</strong></p>
+        <p>Paste the context block into the new thread and then continue with:</p>
+        <div class="command-box">
+            “Let’s continue from where we left off and pick up with the next steps for the project.”
+        </div>
+    </div>
+
+    <div class="footer">
+        ***Umer Malik: Where Craft Meets Research***
+    </div>
+</div>
+
+</body>
+</html>
