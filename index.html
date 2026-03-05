@@ -1,240 +1,649 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Step-by-Step Guide: New Thread</title>
-    <style>
-        :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --border-color: #30363d;
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent-blue: #58a6ff;
-            --accent-green: #238636;
-            --accent-purple: #bc8cff;
-            --header-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step-by-Step Guide - Starting a New Thread</title>
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--header-font);
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
+  <style>
+    :root{
+      --bg:#0d1117;
+      --card:#161b22;
 
-        .container {
-            max-width: 850px;
-            width: 100%;
-        }
+      --blue:#58a6ff;
+      --purple:#bc8cff;
+      --green:#3fb950;
 
-        .main-title {
-            color: var(--accent-blue);
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-        }
+      --text:#c9d1d9;
+      --muted:#8b949e;
+      --heading:#ffffff;
 
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-        }
+      --border:#30363d;
+      --code:#000000;
+      --action:#21262d;
+    }
 
-        h2 {
-            color: var(--accent-blue);
-            font-size: 1.6rem;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    *{box-sizing:border-box}
+    html,body{height:100%}
 
-        h3 {
-            color: var(--text-main);
-            border-left: 4px solid var(--accent-blue);
-            padding-left: 15px;
-            margin-top: 30px;
-            font-size: 1.2rem;
-        }
+    /* Premium, consistent typography baseline */
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size:16px;
+      font-weight:400;
+      line-height:1.6;
+      letter-spacing:0.12px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
 
-        .highlight-text {
-            color: var(--accent-purple);
-            font-weight: 600;
-            margin-top: 15px;
-            display: block;
-        }
+    /* Standardize heading typography (premium glass-doc feel) */
+    h1,h2,h3{
+      margin:0;
+      color:var(--heading);
+      font-weight:800;
+      letter-spacing:0.25px;
+      line-height:1.25;
+    }
+    h1{font-size:30px;}
+    h2{font-size:20px; color:var(--blue);}
+    h3{font-size:16px; color:var(--purple);}
 
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
+    /* Subtle neon underline accents (same palette) */
+    .u-blue, .u-purple, .u-green{
+      position:relative;
+      display:inline-block;
+      padding-bottom:6px;
+    }
+    .u-blue::after,
+    .u-purple::after,
+    .u-green::after{
+      content:"";
+      position:absolute;
+      left:0; bottom:0;
+      height:2px;
+      width:100%;
+      border-radius:999px;
+      opacity:0.95;
+    }
+    .u-blue::after{
+      background:linear-gradient(90deg, rgba(88,166,255,0.95), rgba(188,140,255,0.35));
+      box-shadow:0 0 12px rgba(88,166,255,0.22);
+    }
+    .u-purple::after{
+      background:linear-gradient(90deg, rgba(188,140,255,0.95), rgba(88,166,255,0.35));
+      box-shadow:0 0 12px rgba(188,140,255,0.20);
+    }
+    .u-green::after{
+      background:linear-gradient(90deg, rgba(63,185,80,0.95), rgba(88,166,255,0.25));
+      box-shadow:0 0 12px rgba(63,185,80,0.20);
+    }
 
-        li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 12px;
-        }
+    p{margin:10px 0}
+    .muted{color:var(--muted)}
 
-        li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: var(--accent-blue);
-        }
+    /* Fixed glass header (required) */
+    header{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:1000;
+      background:rgba(13, 17, 23, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom:1px solid rgba(48, 54, 61, 0.7);
+    }
 
-        .command-container {
-            background-color: #0d1117;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
+    .header-inner{
+      max-width:850px;
+      margin:0 auto;
+      padding:14px 20px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
 
-        .command-box {
-            padding: 15px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            color: #79c0ff;
-            font-size: 0.95rem;
-            white-space: pre-wrap;
-        }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
 
-        .copy-btn {
-            background-color: #21262d;
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            margin: 10px;
-            float: right;
-            transition: 0.2s;
-        }
+    /* Removed "Neon-Glass Professional" per request */
+    .brand .title{
+      margin:0;
+      font-size:16px;
+      color:var(--heading);
+      font-weight:800;
+      letter-spacing:0.25px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand .subtitle{
+      font-size:12px;
+      color:var(--muted);
+      letter-spacing:0.45px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
 
-        .copy-btn:hover {
-            background-color: #30363d;
-            border-color: var(--text-muted);
-        }
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
 
-        .example-block {
-            background-color: rgba(188, 140, 255, 0.05);
-            border: 1px solid rgba(188, 140, 255, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
+    /* Primary buttons (neon blue) */
+    .nav .navbtn{
+      appearance:none;
+      border:1px solid rgba(88,166,255,0.55);
+      background:rgba(88,166,255,0.12);
+      color:var(--blue);
+      padding:8px 10px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:12px;
+      transition: all 0.3s ease; /* required */
+      white-space:nowrap;
+    }
+    .nav .navbtn:hover{
+      border-color: rgba(88,166,255,0.95);
+      box-shadow: 0 0 18px rgba(88,166,255,0.18);
+      transform: translateY(-1px);
+    }
+    .nav .navbtn.active{
+      border-color: rgba(188,140,255,0.85);
+      color: var(--purple);
+      box-shadow: 0 0 18px rgba(188,140,255,0.16);
+    }
 
-        .summary-section {
-            border: 2px solid var(--accent-green);
-            background-color: rgba(35, 134, 54, 0.03);
-        }
+    /* Progress bar (required) */
+    .progress-track{
+      height:4px;
+      width:100%;
+      background:rgba(48, 54, 61, 0.55);
+    }
+    .progress-fill{
+      height:4px;
+      width:0%;
+      background:linear-gradient(90deg, var(--blue), var(--purple));
+      box-shadow:0 0 14px rgba(88,166,255,0.45), 0 0 18px rgba(188,140,255,0.25);
+      transition: width 0.3s ease; /* required */
+    }
 
-        .footer {
-            text-align: center;
-            font-style: italic;
-            color: var(--text-muted);
-            margin-top: 50px;
-            padding-bottom: 30px;
-        }
+    main{
+      max-width:850px;
+      margin:0 auto;
+      padding:124px 20px 40px;
+    }
 
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-    </style>
+    /* Cards (required) */
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:30px;
+      margin:18px 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+    .card:hover{
+      border-color: rgba(88,166,255,0.95);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.28), 0 0 22px rgba(88,166,255,0.08);
+    }
+
+    /* Collapsible headers */
+    .card-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .chev{
+      color:var(--muted);
+      font-weight:900;
+      transition: all 0.3s ease;
+    }
+    .card[data-open="true"] .chev{
+      color:var(--blue);
+      transform: rotate(180deg);
+    }
+    .card-body{margin-top:14px}
+    .card[data-open="false"] .card-body{display:none}
+
+    /* Notes (required) */
+    .note{
+      background: rgba(188, 140, 255, 0.05);
+      border-left:4px solid var(--purple);
+      padding:14px 16px;
+      border-radius:12px;
+      margin:14px 0;
+      transition: all 0.3s ease;
+    }
+
+    /* Bullet-less list arrows (required) */
+    ul.arrow{
+      list-style:none;
+      padding:0;
+      margin:12px 0 0;
+    }
+    ul.arrow li{
+      position:relative;
+      padding-left:26px;
+      margin:10px 0;
+    }
+    ul.arrow li::before{
+      content:"→";
+      position:absolute;
+      left:0;
+      top:0;
+      color:var(--blue);
+      font-weight:900;
+    }
+
+    /* Command box (required structure) */
+    .cmd{
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      margin:14px 0;
+      transition: all 0.3s ease;
+    }
+    .cmd:hover{
+      border-color: rgba(88,166,255,0.95);
+      box-shadow:0 0 18px rgba(88,166,255,0.10);
+    }
+    pre{
+      margin:0;
+      padding:18px;
+      background:var(--code);
+      color:var(--text);
+      overflow:auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size:13px;
+      line-height:1.55;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+    .actionbar{
+      background:var(--action);
+      padding:10px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      border-top:1px solid rgba(48, 54, 61, 0.9);
+    }
+    .actionbar .label{
+      color:var(--muted);
+      font-size:12px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    /* Copy button (required) */
+    .btn{
+      appearance:none;
+      border:1px solid rgba(88,166,255,0.55);
+      background:rgba(88,166,255,0.12);
+      color:var(--blue);
+      padding:9px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:800;
+      letter-spacing:0.2px;
+      transition: all 0.3s ease;
+    }
+    .btn:hover{
+      border-color: rgba(88,166,255,0.95);
+      box-shadow: 0 0 18px rgba(88,166,255,0.18);
+      transform: translateY(-1px);
+    }
+    .btn:active{transform: translateY(0px)}
+
+    .btn.copied{
+      background: rgba(63,185,80,0.16);
+      border-color: rgba(63,185,80,0.9);
+      color: var(--green);
+      box-shadow: 0 0 18px rgba(63,185,80,0.20);
+    }
+
+    /* Summary (green accent required) */
+    .summary{
+      border:1px solid rgba(63,185,80,0.55);
+      border-radius:16px;
+      padding:18px;
+      background: rgba(63,185,80,0.06);
+      margin-top:14px;
+      transition: all 0.3s ease;
+    }
+    .summary:hover{
+      border-color: rgba(63,185,80,0.95);
+      box-shadow:0 0 18px rgba(63,185,80,0.12);
+    }
+    .summary h3{color:var(--green)}
+
+    footer{
+      max-width:850px;
+      margin:10px auto 36px;
+      padding:0 20px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+    footer em strong{
+      color:var(--heading);
+      letter-spacing:0.2px;
+    }
+
+    @media (max-width:650px){
+      .header-inner{flex-direction:column; align-items:flex-start}
+      .nav{justify-content:flex-start}
+      main{padding-top:150px}
+      .card{padding:22px}
+      h1{font-size:26px}
+    }
+  </style>
 </head>
+
 <body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="title">Starting a New Thread - Continue the Same Project</div>
+        <div class="subtitle">Step-by-step workflow - keep speed, keep context</div>
+      </div>
 
-<div class="container">
-    <h1 class="main-title">Step-by-Step Guide: Starting a New Thread</h1>
-
-    <div class="card">
-        <h2>Why Start a New Thread?</h2>
-        <p>When a thread becomes too long, it may start to slow down the AI’s performance. To maintain a smooth workflow, it's recommended to start a new thread, which will improve speed and ensure the conversation remains responsive.</p>
-        
-        <span class="highlight-text">Model’s Internal Algorithms</span>
-        <p>The algorithms used to process large amounts of text and maintain logical flow across long conversations can become inefficient as the input grows. At a certain point, the AI might not handle complex or long conversations as smoothly as shorter ones.</p>
+      <div class="nav" aria-label="Quick navigation">
+        <button class="navbtn" data-jump="#intro">Intro</button>
+        <button class="navbtn" data-jump="#background">Background</button>
+        <button class="navbtn" data-jump="#execution">Execution</button>
+        <button class="navbtn" data-jump="#summary">Summary</button>
+      </div>
     </div>
 
-    <div class="card">
-        <h2>How to Start a New Thread and Continue the Same Project</h2>
+    <div class="progress-track" aria-hidden="true">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </header>
 
-        <h3>1. Identify When to Start a New Thread</h3>
-        <ul>
-            <li>If you notice the conversation is slowing down or responses are taking longer than usual.</li>
-            <li>Best to start a new thread before performance is significantly affected.</li>
+  <main>
+    <section class="card" id="intro" data-open="true">
+      <div class="card-head" role="button" tabindex="0" aria-expanded="true">
+        <div>
+          <h1 class="u-blue">Step-by-Step Guide</h1>
+          <h2 style="margin-top:10px" class="u-purple">Starting a New Thread to Continue the Same Project</h2>
+        </div>
+        <div class="chev">⌄</div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted">
+          Use this guide when your conversation gets long and you want to keep the same project moving without losing context.
+        </p>
+
+        <div class="note">
+          <strong style="color:var(--purple)">Tip:</strong>
+          If things feel slower or the logic starts drifting, it is usually the right time to start fresh with a clean thread and a clean context block.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="background" data-open="true">
+      <div class="card-head" role="button" tabindex="0" aria-expanded="true">
+        <h2 class="u-blue">BACKGROUND</h2>
+        <div class="chev">⌄</div>
+      </div>
+
+      <div class="card-body">
+        <h3 class="u-purple">Why Start a New Thread?</h3>
+        <p>
+          When a thread becomes too long, it may start to slow down the AI’s performance. To maintain a smooth workflow,
+          it is recommended to start a new thread, which improves speed and keeps the conversation responsive.
+        </p>
+
+        <h3 class="u-purple">Model’s Internal Algorithms</h3>
+        <p>
+          The algorithms used to process large amounts of text and maintain logical flow across long conversations can become
+          inefficient as the input grows. At a certain point, the AI might not handle complex or long conversations as smoothly
+          as shorter ones.
+        </p>
+      </div>
+    </section>
+
+    <section class="card" id="execution" data-open="true">
+      <div class="card-head" role="button" tabindex="0" aria-expanded="true">
+        <h2 class="u-blue">EXECUTION</h2>
+        <div class="chev">⌄</div>
+      </div>
+
+      <div class="card-body">
+        <h3 class="u-purple">1. Identify When to Start a New Thread</h3>
+        <ul class="arrow">
+          <li>If you notice the conversation is slowing down or responses are taking longer than usual, it is a strong sign the thread is too long.</li>
+          <li>To avoid delays, start a new thread before performance is significantly affected.</li>
         </ul>
 
-        <h3>2. Ask the AI to Provide Project Context</h3>
-        <p>Ask for the context block in your <strong>current</strong> thread:</p>
-        <div class="command-container clearfix">
-            <button class="copy-btn" onclick="copyText('cmd1')">Copy Command</button>
-            <div id="cmd1" class="command-box">“I would like to start a new thread. Please provide the following project context block at the top for this project, so the new conversation can continue from where we stopped.”</div>
+        <h3 class="u-purple">2. Ask the AI to Provide Project Context</h3>
+        <p>
+          In your current thread, ask the AI to generate a project context block that summarizes the working state.
+        </p>
+
+        <div class="cmd">
+          <pre id="cmd1">I would like to start a new thread. Please provide the following project context block at the top for this project, so the new conversation can continue from where we stopped.</pre>
+          <div class="actionbar">
+            <div class="label">Copy Command - Request Project Context Block</div>
+            <button class="btn" data-copy-target="cmd1">Copy</button>
+          </div>
         </div>
 
-        <h3>3. Example: How to Use It</h3>
-        <div class="example-block">
-            <p><strong>Step A:</strong> You type the command above in your old chat.</p>
-            <p><strong>Step B:</strong> The AI replies with: <br><em>"Project: Web Design | Status: Part 1 Complete | Next: Coding Footer..."</em></p>
-            <p><strong>Step C:</strong> You copy that block, open a <strong>New Thread</strong>, and paste it immediately.</p>
+        <h3 class="u-purple">3. Copy the Project Context Block</h3>
+        <p>
+          Once the AI provides the project context block, copy it. This block contains the key objectives, current state,
+          and critical details so the new thread can continue seamlessly.
+        </p>
+
+        <h3 class="u-purple">4. Start the New Thread</h3>
+        <ul class="arrow">
+          <li>Open a new thread with the AI.</li>
+          <li>Paste the copied project context block at the very beginning of the new thread.</li>
+          <li><strong style="color:var(--blue)">This is critical:</strong> it ensures the AI has the required background to continue without missing important details.</li>
+        </ul>
+
+        <h3 class="u-purple">5. Continue Where You Left Off</h3>
+        <p>
+          After pasting the project context block, resume the project with your next instruction - just like you would in the original thread.
+        </p>
+
+        <div class="cmd">
+          <pre id="cmd2">Let’s continue from where we left off and pick up with the next steps for the project.</pre>
+          <div class="actionbar">
+            <div class="label">Copy Command - Continue the Project</div>
+            <button class="btn" data-copy-target="cmd2">Copy</button>
+          </div>
         </div>
 
-        <h3>4. Start the New Thread & Continue</h3>
-        <p>Paste the block, then follow up with:</p>
-        <div class="command-container clearfix">
-            <button class="copy-btn" onclick="copyText('cmd2')">Copy Command</button>
-            <div id="cmd2" class="command-box">“Let’s continue from where we left off and pick up with the next steps for the project.”</div>
+        <h3 class="u-purple">6. Name the New Thread</h3>
+        <p>
+          For clarity, name the new thread something like <span style="color:var(--blue)">"Project Name - Part 2"</span>.
+          This helps you track project continuity across multiple threads.
+        </p>
+      </div>
+    </section>
+
+    <section class="card" id="summary" data-open="true">
+      <div class="card-head" role="button" tabindex="0" aria-expanded="true">
+        <h2 class="u-blue">SUMMARY</h2>
+        <div class="chev">⌄</div>
+      </div>
+
+      <div class="card-body">
+        <div class="summary">
+          <h3 class="u-green">Quick Summary of Commands</h3>
+
+          <h3 class="u-purple" style="margin-top:14px">To ask for the project context block</h3>
+          <div class="cmd">
+            <pre id="cmd3">I would like to start a new thread. Please provide the following project context block at the top for this project, so the new conversation can continue from where we stopped.</pre>
+            <div class="actionbar">
+              <div class="label">Copy Command - Context Block</div>
+              <button class="btn" data-copy-target="cmd3">Copy</button>
+            </div>
+          </div>
+
+          <h3 class="u-purple">To continue the project in the new thread</h3>
+          <p class="muted" style="margin:8px 0 0">
+            Paste the context block into the new thread, then send:
+          </p>
+
+          <div class="cmd">
+            <pre id="cmd4">Let’s continue from where we left off and pick up with the next steps for the project.</pre>
+            <div class="actionbar">
+              <div class="label">Copy Command - Continue</div>
+              <button class="btn" data-copy-target="cmd4">Copy</button>
+            </div>
+          </div>
+
+          <h3 class="u-green">Short Example</h3>
+          <p>
+            If you are writing a book called <strong>"The Lost Galaxy"</strong>, your new thread should start with the context block provided by the AI.
+            Then send the continue command. This keeps the AI focused on your plot and characters without the lag of an extremely long thread.
+          </p>
         </div>
-    </div>
+      </div>
+    </section>
+  </main>
 
-    <div class="card summary-section">
-        <h2>Quick Summary of Commands:</h2>
-        
-        <p><strong>Step 1: Get Context (Old Thread)</strong></p>
-        <div class="command-container clearfix">
-            <button class="copy-btn" onclick="copyText('sum1')">Copy</button>
-            <div id="sum1" class="command-box">“I would like to start a new thread. Please provide the following project context block at the top for this project, so the new conversation can continue from where we stopped.”</div>
-        </div>
+  <footer>
+    <em><strong>***Umer Malik: Where Craft Meets Research***</strong></em>
+  </footer>
 
-        <p><strong>Step 2: Resume (New Thread)</strong></p>
-        <div class="command-container clearfix">
-            <button class="copy-btn" onclick="copyText('sum2')">Copy</button>
-            <div id="sum2" class="command-box">“Let’s continue from where we left off and pick up with the next steps for the project.”</div>
-        </div>
-    </div>
+  <script>
+    // Smooth scroll progress (required)
+    (function(){
+      const fill = document.getElementById('progressFill');
 
-    <div class="footer">
-        ***Umer Malik: Where Craft Meets Research***
-    </div>
-</div>
+      function updateProgress(){
+        const doc = document.documentElement;
+        const scrollTop = doc.scrollTop || document.body.scrollTop;
+        const scrollHeight = (doc.scrollHeight || document.body.scrollHeight) - doc.clientHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        fill.style.width = progress.toFixed(2) + "%";
+      }
 
-<script>
-    function copyText(elementId) {
-        const text = document.getElementById(elementId).innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            const btn = event.target;
-            const originalText = btn.innerText;
-            btn.innerText = "Copied!";
-            btn.style.backgroundColor = "#238636";
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.style.backgroundColor = "#21262d";
-            }, 2000);
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+      updateProgress();
+    })();
+
+    // Copy logic (required): COPIED! + neon green for 2 seconds
+    (function(){
+      function setCopied(btn, originalText){
+        btn.classList.add('copied');
+        btn.textContent = 'COPIED!';
+        setTimeout(function(){
+          btn.classList.remove('copied');
+          btn.textContent = originalText;
+        }, 2000);
+      }
+
+      async function copyText(text){
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly','');
+        ta.style.position = 'fixed';
+        ta.style.top = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+
+      document.querySelectorAll('button[data-copy-target]').forEach(function(btn){
+        const original = btn.textContent;
+        btn.addEventListener('click', async function(){
+          const id = btn.getAttribute('data-copy-target');
+          const el = document.getElementById(id);
+          const text = el ? el.textContent : '';
+          try{
+            await copyText(text);
+            setCopied(btn, original);
+          }catch(e){
+            setCopied(btn, original);
+          }
         });
-    }
-</script>
+      });
+    })();
 
+    // Extra interactivity: smooth nav + active section + collapsible cards
+    (function(){
+      const navButtons = Array.from(document.querySelectorAll('.navbtn'));
+      const sections = ['#intro', '#background', '#execution', '#summary']
+        .map(id => document.querySelector(id))
+        .filter(Boolean);
+
+      function smoothJump(target){
+        const el = document.querySelector(target);
+        if(!el) return;
+        el.scrollIntoView({ behavior:'smooth', block:'start' });
+      }
+
+      navButtons.forEach(btn => {
+        btn.addEventListener('click', function(){
+          const t = btn.getAttribute('data-jump');
+          smoothJump(t);
+        });
+      });
+
+      function setActive(hash){
+        navButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-jump') === hash));
+      }
+
+      const obs = new IntersectionObserver((entries)=>{
+        const visible = entries.filter(e => e.isIntersecting).sort((a,b)=> b.intersectionRatio - a.intersectionRatio)[0];
+        if(!visible) return;
+        const id = '#' + visible.target.id;
+        setActive(id);
+      }, { root:null, threshold:[0.25, 0.5, 0.75] });
+
+      sections.forEach(s => obs.observe(s));
+      setActive('#intro');
+
+      // Collapsible cards
+      document.querySelectorAll('.card').forEach(card => {
+        const head = card.querySelector('.card-head');
+        if(!head) return;
+
+        function toggle(){
+          const isOpen = card.getAttribute('data-open') !== 'false';
+          card.setAttribute('data-open', isOpen ? 'false' : 'true');
+          head.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        }
+
+        head.addEventListener('click', toggle);
+        head.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            toggle();
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
